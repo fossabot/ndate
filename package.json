@@ -1,0 +1,51 @@
+{
+  "name": "node-date",
+  "version": "0.0.1",
+  "homepage": "https://github.com/akazakou/node-date/wiki",
+  "author": "Andrei Kazakou",
+  "main": "build/src/index.js",
+  "description": "Implementation of comfortable work with dates, intervals and timezones",
+  "bugs": {
+    "url": "https://github.com/akazakou/node-date/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:akazakou/node-date.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "date",
+    "node-date",
+    "datetime",
+    "interval",
+    "time",
+    "timeout",
+    "timzone"
+  ],
+  "scripts": {
+    "build": "gulp default",
+    "test": "gulp test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.43",
+    "@types/sinon": "^2.3.5",
+    "chai": "^4.1.2",
+    "gulp": "^3.9.1",
+    "gulp-env": "^0.4.0",
+    "gulp-istanbul": "^1.1.2",
+    "gulp-mocha": "^3.0.1",
+    "gulp-replace": "^0.5.4",
+    "gulp-rimraf": "^0.2.1",
+    "gulp-shell": "^0.5.2",
+    "gulp-tslint": "^7.1.0",
+    "mocha": "^3.5.3",
+    "sinon": "^3.3.0",
+    "tslint": "^4.5.1",
+    "typescript": "^2.5.2"
+  },
+  "engines": {
+    "node": ">=6.5.0"
+  }
+}
