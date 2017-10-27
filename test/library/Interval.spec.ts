@@ -38,4 +38,24 @@ describe("Interval", () => {
     expect(interval.format('%Y-\\%M-%D')).to.be.equals('2017-%M-02');
     expect(interval.format('%Y-\\%M-%DT%H:%I:\\%S.%FZ')).to.be.equals('2017-%M-02T03:04:%S.006Z');
   });
+
+  it('should correctly use default values', async () => {
+    let interval: NBasicInterval = new NBasicInterval();
+    expect(interval.format('%Y')).to.be.equals('0');
+    expect(interval.format('%y')).to.be.equals('00');
+    expect(interval.format('%M')).to.be.equals('00');
+    expect(interval.format('%m')).to.be.equals('0');
+    expect(interval.format('%D')).to.be.equals('00');
+    expect(interval.format('%d')).to.be.equals('0');
+    expect(interval.format('%H')).to.be.equals('00');
+    expect(interval.format('%h')).to.be.equals('0');
+    expect(interval.format('%I')).to.be.equals('00');
+    expect(interval.format('%i')).to.be.equals('0');
+    expect(interval.format('%S')).to.be.equals('00');
+    expect(interval.format('%s')).to.be.equals('0');
+    expect(interval.format('%F')).to.be.equals('000');
+    expect(interval.format('%f')).to.be.equals('0');
+    expect(interval.format('%R')).to.be.equals('-');
+    expect(interval.format('%r')).to.be.equals('-');
+  });
 });
