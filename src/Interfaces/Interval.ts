@@ -1,4 +1,7 @@
-interface IBasicInterval {
+/**
+ * Values of Interval interface
+ */
+interface Values {
   /**
    * Difference in milliseconds between two dates
    */
@@ -31,7 +34,9 @@ interface IBasicInterval {
    * Is that date are reversed
    */
   reverse: boolean;
+}
 
+interface Interval extends Values {
   /**
    * Formatting interval to requested format
    * @param {string} format
@@ -41,5 +46,5 @@ interface IBasicInterval {
 }
 
 export {
-  IBasicInterval,
+  Interval,
 }
