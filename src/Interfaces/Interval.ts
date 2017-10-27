@@ -5,35 +5,35 @@ interface Values {
   /**
    * Difference in milliseconds between two dates
    */
-  milliseconds: number;
+  readonly milliseconds: number;
   /**
    * Difference in seconds between two dates
    */
-  seconds: number;
+  readonly seconds: number;
   /**
    * Difference in minutes between two dates
    */
-  minutes: number;
+  readonly minutes: number;
   /**
    * Difference in hours between two dates
    */
-  hours: number;
+  readonly hours: number;
   /**
    * Difference in days between two dates
    */
-  days: number;
+  readonly days: number;
   /**
    * Difference in months between two dates
    */
-  months: number;
+  readonly months: number;
   /**
    * Difference in years between two dates
    */
-  years: number;
+  readonly years: number;
   /**
    * Is that date are reversed
    */
-  reverse: boolean;
+  readonly reverse: boolean;
 }
 
 interface Interval extends Values {

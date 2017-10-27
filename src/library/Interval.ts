@@ -13,36 +13,58 @@ class Interval implements IntervalInterface {
   /**
    * Difference in milliseconds between two dates
    */
-  public milliseconds: number = 0;
+  public readonly milliseconds: number;
   /**
    * Difference in seconds between two dates
    */
-  public seconds: number = 0;
+  public readonly seconds: number;
   /**
    * Difference in minutes between two dates
    */
-  public minutes: number = 0;
+  public readonly minutes: number;
   /**
    * Difference in hours between two dates
    */
-  public hours: number = 0;
+  public readonly hours: number;
   /**
    * Difference in days between two dates
    */
-  public days: number = 0;
+  public readonly days: number;
   /**
    * Difference in months between two dates
    */
-  public months: number = 0;
+  public readonly months: number;
   /**
    * Difference in years between two dates
    */
-  public years: number = 0;
+  public readonly years: number;
   /**
    * Is that date are reversed
    * @type {boolean}
    */
-  public reverse: boolean = false;
+  public readonly reverse: boolean;
+
+  /**
+   * Constructor required for updating readonly properties
+   * @param {number} years
+   * @param {number} months
+   * @param {number} days
+   * @param {number} hours
+   * @param {number} minutes
+   * @param {number} seconds
+   * @param {number} milliseconds
+   * @param {boolean} reverse
+   */
+  constructor(years: number, months: number, days: number, hours: number, minutes: number, seconds: number, milliseconds: number, reverse: boolean) {
+    this.years = years;
+    this.months = months;
+    this.days = days;
+    this.hours = hours;
+    this.minutes = minutes;
+    this.seconds = seconds;
+    this.milliseconds = milliseconds;
+    this.reverse = reverse;
+  }
 
   /**
    * Formatting interval to requested format
@@ -119,18 +141,18 @@ class Interval implements IntervalInterface {
  */
 class Absolute extends Interval {
   public constructor(beginDate: Date, endDate: Date) {
-    super();
-
     let diff = Math.abs(endDate.getTime() - beginDate.getTime());
 
-    this.reverse = beginDate > endDate;
-    this.milliseconds = diff;
-    this.seconds = Math.ceil(diff / 1000);
-    this.minutes = Math.ceil(diff / (1000 * 60));
-    this.hours = Math.ceil(diff / (1000 * 60 * 60));
-    this.days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-    this.months = Math.abs((endDate.getFullYear() - beginDate.getFullYear()) * 12) + Math.abs(endDate.getMonth() - beginDate.getMonth());
-    this.years = Math.abs(endDate.getFullYear() - beginDate.getFullYear());
+    const reverse = beginDate > endDate;
+    const milliseconds = diff;
+    const seconds = Math.ceil(diff / 1000);
+    const minutes = Math.ceil(diff / (1000 * 60));
+    const hours = Math.ceil(diff / (1000 * 60 * 60));
+    const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    const months = Math.abs((endDate.getFullYear() - beginDate.getFullYear()) * 12) + Math.abs(endDate.getMonth() - beginDate.getMonth());
+    const years = Math.abs(endDate.getFullYear() - beginDate.getFullYear());
+
+    super(years, months, days, hours, minutes, seconds, milliseconds, reverse);
   }
 }
 
@@ -142,8 +164,6 @@ class Absolute extends Interval {
  */
 class Relative extends Interval {
   public constructor(beginDate: Date, endDate: Date) {
-    super();
-
     let tempDate: Date = beginDate;
     let reverse = false;
     if (beginDate > endDate) {
@@ -164,14 +184,15 @@ class Relative extends Interval {
       return ret;
     }
 
-    this.reverse = reverse;
-    this.years = doCompare(tempDate, endDate, 'FullYear');
-    this.months = doCompare(tempDate, endDate, 'Month');
-    this.days = doCompare(tempDate, endDate, 'Date');
-    this.hours = doCompare(tempDate, endDate, 'Hours');
-    this.minutes = doCompare(tempDate, endDate, 'Minutes');
-    this.seconds = doCompare(tempDate, endDate, 'Seconds');
-    this.milliseconds = doCompare(tempDate, endDate, 'Time');
+    const years = doCompare(tempDate, endDate, 'FullYear');
+    const months = doCompare(tempDate, endDate, 'Month');
+    const days = doCompare(tempDate, endDate, 'Date');
+    const hours = doCompare(tempDate, endDate, 'Hours');
+    const minutes = doCompare(tempDate, endDate, 'Minutes');
+    const seconds = doCompare(tempDate, endDate, 'Seconds');
+    const milliseconds = doCompare(tempDate, endDate, 'Time');
+
+    super(years, months, days, hours, minutes, seconds, milliseconds, reverse);
   }
 }
 
