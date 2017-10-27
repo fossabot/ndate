@@ -117,7 +117,7 @@ class NBasicInterval implements IBasicInterval {
   protected static _pad(num: number, places: number, char: string = '0'): string {
     num = Math.round(num);
 
-    if (num >= 1000) {
+    if (num.toString().length >= places.toString().length + 1) {
       return num.toString().slice(0, places);
     }
 
@@ -126,10 +126,22 @@ class NBasicInterval implements IBasicInterval {
   }
 }
 
+/**
+ * Absolute interval between two dates.
+ *
+ * For example difference between two dates like "2017-01-01T00:00:00.000Z" and "2018-01-01T00:00:00.000Z" will be:
+ * years: 1, months: 12, days: 365, hours: 8760, minutes: 525600, seconds: 31536000, milliseconds: 31536000000
+ */
 class AbsoluteInterval extends NBasicInterval {
 
 }
 
+/**
+ * Relative interval between two dates.
+ *
+ * For example difference between two dates like "2017-01-01T00:00:00.000Z" and "2018-03-04T04:05:06.007Z" will be:
+ * years: 1, months: 2, days: 3, hours: 4, minutes: 5, seconds: 6, milliseconds: 7
+ */
 class RelativeInterval extends NBasicInterval {
 
 }
