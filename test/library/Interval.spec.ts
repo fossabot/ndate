@@ -1,5 +1,6 @@
 import {expect} from "chai";
 import {Relative, Absolute} from "../../src/library/Interval";
+import {Parameters} from "../../src/Interfaces/Interval";
 
 describe("Interval", () => {
   describe("Formatting", () => {
@@ -58,6 +59,36 @@ describe("Interval", () => {
   });
 
   describe("Relative", () => {
+    it('should correctly create object from parameters set', async () => {
+      let interval = new Relative({
+        years: 1,
+        months: 2,
+        days: 3,
+        hours: 4,
+        minutes: 5,
+        seconds: 6,
+        milliseconds: 7,
+        reverse: false,
+      } as Parameters);
+
+      expect(interval.years).to.be.equals(1);
+      expect(interval.months).to.be.equals(2);
+      expect(interval.days).to.be.equals(3);
+      expect(interval.hours).to.be.equals(4);
+      expect(interval.minutes).to.be.equals(5);
+      expect(interval.seconds).to.be.equals(6);
+      expect(interval.milliseconds).to.be.equals(7);
+      expect(interval.reverse).to.be.false;
+    });
+
+    it('should throw error on creating object from empty parameters set', async () => {
+      const fcn = function () {
+        new Relative({} as Parameters);
+      };
+
+      expect(fcn).to.throw(TypeError, 'Wrong parameters set for Relative interval object');
+    });
+
     it('should correctly calculate interval', async () => {
       let interval = new Relative(new Date('2000-01-01T00:00:00.000Z'), new Date('2001-03-04T04:05:06.007Z'));
       expect(interval.years).to.be.equals(1);

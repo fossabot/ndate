@@ -1,4 +1,4 @@
-import {Interval as IntervalInterface} from "../Interfaces/Interval";
+import {Interval as IntervalInterface, Parameters} from "../Interfaces/Interval";
 
 /**
  * Allowed characters for formatting interval into string
@@ -13,36 +13,36 @@ class Interval implements IntervalInterface {
   /**
    * Difference in milliseconds between two dates
    */
-  public readonly milliseconds: number;
+  public readonly milliseconds: number = 0;
   /**
    * Difference in seconds between two dates
    */
-  public readonly seconds: number;
+  public readonly seconds: number = 0;
   /**
    * Difference in minutes between two dates
    */
-  public readonly minutes: number;
+  public readonly minutes: number = 0;
   /**
    * Difference in hours between two dates
    */
-  public readonly hours: number;
+  public readonly hours: number = 0;
   /**
    * Difference in days between two dates
    */
-  public readonly days: number;
+  public readonly days: number = 0;
   /**
    * Difference in months between two dates
    */
-  public readonly months: number;
+  public readonly months: number = 0;
   /**
    * Difference in years between two dates
    */
-  public readonly years: number;
+  public readonly years: number = 0;
   /**
    * Is that date are reversed
    * @type {boolean}
    */
-  public readonly reverse: boolean;
+  public readonly reverse: boolean = false;
 
   /**
    * Constructor required for updating readonly properties
@@ -140,6 +140,11 @@ class Interval implements IntervalInterface {
  * years: 1, months: 12, days: 366, hours: 8784, minutes: 527040, seconds: 31622400, milliseconds: 31622400000
  */
 class Absolute extends Interval {
+  /**
+   * Create object like difference between two dates
+   * @param {Date} beginDate
+   * @param {Date} endDate
+   */
   public constructor(beginDate: Date, endDate: Date) {
     let diff = Math.abs(endDate.getTime() - beginDate.getTime());
 
@@ -153,6 +158,7 @@ class Absolute extends Interval {
     const years = Math.abs(endDate.getFullYear() - beginDate.getFullYear());
 
     super(years, months, days, hours, minutes, seconds, milliseconds, reverse);
+    return;
   }
 }
 
@@ -163,36 +169,78 @@ class Absolute extends Interval {
  * years: 1, months: 2, days: 3, hours: 4, minutes: 5, seconds: 6, milliseconds: 7
  */
 class Relative extends Interval {
-  public constructor(beginDate: Date, endDate: Date) {
-    let tempDate: Date = beginDate;
-    let reverse = false;
-    if (beginDate > endDate) {
-      beginDate = endDate;
-      endDate = tempDate;
-      reverse = true;
-    }
-
-    tempDate = new Date(beginDate);
-
-    function doCompare(from, end, what) {
-      let ret = -1;
-      while (from <= end) {
-        ret++;
-        from['set' + what](from['get' + what]() + 1);
+  /**
+   * Creates object from parameters set
+   * @param {Parameters} params
+   */
+  public constructor(params: Parameters);
+  /**
+   * Create object like difference between two dates
+   * @param {Date} beginDate
+   * @param {Date} endDate
+   */
+  public constructor(beginDate: Date, endDate: Date);
+  public constructor(beginDate: any, endDate?: Date) {
+    // constructor behavior for range between dates
+    if (beginDate instanceof Date && endDate && endDate instanceof Date) {
+      let tempDate: Date = beginDate;
+      let reverse = false;
+      if (beginDate > endDate) {
+        beginDate = endDate;
+        endDate = tempDate;
+        reverse = true;
       }
-      from['set' + what](from['get' + what]() - 1);
-      return ret;
+
+      tempDate = new Date(beginDate);
+
+      const doCompare = function (from, end, what) {
+        let ret = -1;
+        while (from <= end) {
+          ret++;
+          from['set' + what](from['get' + what]() + 1);
+        }
+        from['set' + what](from['get' + what]() - 1);
+        return ret;
+      };
+
+      const years = doCompare(tempDate, endDate, 'FullYear');
+      const months = doCompare(tempDate, endDate, 'Month');
+      const days = doCompare(tempDate, endDate, 'Date');
+      const hours = doCompare(tempDate, endDate, 'Hours');
+      const minutes = doCompare(tempDate, endDate, 'Minutes');
+      const seconds = doCompare(tempDate, endDate, 'Seconds');
+      const milliseconds = doCompare(tempDate, endDate, 'Time');
+
+      super(years, months, days, hours, minutes, seconds, milliseconds, reverse);
+      return;
     }
 
-    const years = doCompare(tempDate, endDate, 'FullYear');
-    const months = doCompare(tempDate, endDate, 'Month');
-    const days = doCompare(tempDate, endDate, 'Date');
-    const hours = doCompare(tempDate, endDate, 'Hours');
-    const minutes = doCompare(tempDate, endDate, 'Minutes');
-    const seconds = doCompare(tempDate, endDate, 'Seconds');
-    const milliseconds = doCompare(tempDate, endDate, 'Time');
+    // constructor behavior for parameters object
+    if (!(beginDate instanceof Date) && ( beginDate.years
+        || beginDate.months
+        || beginDate.days
+        || beginDate.hours
+        || beginDate.minutes
+        || beginDate.seconds
+        || beginDate.milliseconds
+        || beginDate.reverse)
+    ) {
+      let params: Parameters = Object.assign({
+        years: 0,
+        months: 0,
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        milliseconds: 0,
+        reverse: false,
+      }, beginDate);
 
-    super(years, months, days, hours, minutes, seconds, milliseconds, reverse);
+      super(params.years, params.months, params.days, params.hours, params.minutes, params.seconds, params.milliseconds, params.reverse);
+      return;
+    }
+
+    throw TypeError(`Wrong parameters set for Relative interval object`);
   }
 }
 
