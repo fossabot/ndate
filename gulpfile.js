@@ -44,7 +44,7 @@ gulp.task('test', ['build'], () => {
 
   gulp.src([outDir + '/test/**/*.js'])
     .pipe(mocha())
-    .pipe(istanbul.writeReports())
+    .pipe(istanbul.writeReports({reportOpts: {dir: outDir + '/coverage'}}))
     .pipe(istanbul.enforceThresholds({
       thresholds: {
         global: 100
