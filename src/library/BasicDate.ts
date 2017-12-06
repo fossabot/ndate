@@ -47,20 +47,25 @@ class BasicDateClass implements Date {
   public constructor();
   public constructor(value?: number);
   public constructor(value?: string);
+  public constructor(value?: Date | BasicDateClass);
   public constructor(year: number, month: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number);
   public constructor(...value: any[]) {
     // if we do not have arguments it's means create current date object
-    if (arguments.length === 0) {
+    if (value.length === 0) {
       this.date = new Date();
     }
 
     // try to parse only one argument
-    if (arguments.length === 1) {
-      this.date = new Date(arguments[0]);
+    if (value.length === 1) {
+      if (value[0] instanceof BasicDateClass) {
+        this.date = new Date(value[0].getTime());
+      } else {
+        this.date = new Date(value[0]);
+      }
     }
 
     // if we have more than one argument
-    if (arguments.length > 1) {
+    if (value.length > 1) {
       const [year, month, date, hours, minutes, seconds, ms] = value;
       this.date = new Date(year, month, date, hours, minutes, seconds, ms);
     }
