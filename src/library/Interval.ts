@@ -154,8 +154,8 @@ class Absolute extends Interval {
     const minutes = Math.ceil(diff / (1000 * 60));
     const hours = Math.ceil(diff / (1000 * 60 * 60));
     const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-    const months = Math.abs((endDate.getFullYear() - beginDate.getFullYear()) * 12) + Math.abs(endDate.getMonth() - beginDate.getMonth());
-    const years = Math.abs(endDate.getFullYear() - beginDate.getFullYear());
+    const months = Math.abs((endDate.getUTCFullYear() - beginDate.getUTCFullYear()) * 12) + Math.abs(endDate.getUTCMonth() - beginDate.getUTCMonth());
+    const years = Math.abs(endDate.getUTCFullYear() - beginDate.getUTCFullYear());
 
     super(years, months, days, hours, minutes, seconds, milliseconds, reverse);
     return;
@@ -194,12 +194,15 @@ class Relative extends Interval {
       tempDate = new Date(beginDate);
 
       const doCompare = function (from, end, what) {
+        const setter = what === 'Time' ? 'set' : 'setUTC';
+        const getter = what === 'Time' ? 'get' : 'getUTC';
+
         let ret = -1;
         while (from <= end) {
           ret++;
-          from['set' + what](from['get' + what]() + 1);
+          from[setter + what](from[getter + what]() + 1);
         }
-        from['set' + what](from['get' + what]() - 1);
+        from[setter + what](from[getter + what]() - 1);
         return ret;
       };
 
@@ -216,7 +219,7 @@ class Relative extends Interval {
     }
 
     // constructor behavior for parameters object
-    if (!(beginDate instanceof Date) && ( beginDate.years
+    if (!(beginDate instanceof Date) && (beginDate.years
         || beginDate.months
         || beginDate.days
         || beginDate.hours
