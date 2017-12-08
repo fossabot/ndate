@@ -31,6 +31,20 @@ describe("ndate Adding functionality", () => {
     compareDates(date, end);
   });
 
+  it('should correctly add reversed Absolute Interval to existed ndate object', async () => {
+    let date = new NDate(new Date(end));
+    date.add(new Absolute(new Date(end), new Date(begin)));
+
+    compareDates(date, begin);
+  });
+
+  it('should correctly add reversed  Relative Interval to existed ndate object', async () => {
+    let date = new NDate(new Date(end));
+    date.add(new Relative(new Date(end), new Date(begin)));
+
+    compareDates(date, begin);
+  });
+
   it('should throw TypeError on wrong parameter type', async () => {
     let date = new NDate(new Date(begin));
 
