@@ -6,6 +6,7 @@ import {NDate as INDate} from "../../Interfaces/NDate";
 
 /**
  * Apply mixins of all available additional functionality
+ * @see https://blog.mariusschulz.com/2017/05/26/typescript-2-2-mixin-classes
  * @type {Constructor}
  */
 const NDatePrototype: Constructor = NDateSub(
