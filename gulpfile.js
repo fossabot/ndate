@@ -13,7 +13,7 @@ const outDir = 'build';
  * Remove build directory.
  */
 gulp.task('clean', () => {
-  return gulp.src(`${outDir}`, { read: false })
+  return gulp.src(`${outDir}`, {read: false})
     .pipe(rimraf());
 });
 
@@ -33,31 +33,43 @@ gulp.task('compile', shell.task([
 /**
  * Build the project.
  */
-gulp.task('build', ['tslint', 'compile'], () => {
-  console.log('Building the project ...');
+gulp.task('build', ['tslint', 'compile']);
+
+/**
+ * Prepare istanbul for covering
+ */
+gulp.task('pre-test', ['build'], () => {
+  return gulp.src([outDir + '/src/**/*.js'])
+    // Covering files
+    .pipe(istanbul())
+    // Force `require` to return covered files
+    .pipe(istanbul.hookRequire());
 });
 
 /**
- * Run tests.
+ * Run tests and
  */
-gulp.task('test', ['build'], () => {
-
-  gulp.src([outDir + '/test/**/*.spec.js'])
-    .pipe(mocha())
-    .pipe(istanbul.writeReports({reportOpts: {dir: outDir + '/coverage'}}))
-    .pipe(istanbul.enforceThresholds({
-      thresholds: {
-        global: 100
-      }
+gulp.task('test', ['pre-test'], function () {
+  return gulp.src([outDir + '/test/**/*.js'])
+    .pipe(mocha({
+      "extension": [
+        ".ts"
+      ],
+      "require": [
+        "ts-node/register"
+      ],
+      "include": [
+        "src/**/*.ts"
+      ],
+      "exclude": [
+        "**/*.d.ts"
+      ],
+      "all": true
     }))
-    .once('error', (error) => {
-      console.log(error);
-      process.exit(1);
-    })
-    .once('end', () => {
-      process.exit();
-    })
-
+    // Creating the reports after tests ran
+    .pipe(istanbul.writeReports({reportOpts: {dir: outDir + '/coverage'}}))
+    // Enforce a coverage of at least 100%
+    .pipe(istanbul.enforceThresholds({thresholds: {global: 100}}));
 });
 
 gulp.task('default', ['clean'], () => {
