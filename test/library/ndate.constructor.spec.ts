@@ -11,6 +11,73 @@ describe("ndate Constructor functionality", () => {
     example.setUTCHours(0, 0, 0, 0);
   });
 
+  it('should correctly use native setters', async () => {
+    let actual = new NDate();
+    actual.setUTCFullYear(2000, 1, 1);
+    actual.setUTCHours(0, 0, 0, 0);
+    compareDates(actual, example);
+
+    actual.setFullYear(2000, 2, 3);
+    example.setFullYear(2000, 2, 3);
+    compareDates(actual, example);
+
+    actual.setMonth(1, 1);
+    example.setMonth(1, 1);
+    compareDates(actual, example);
+
+    actual.setDate(1);
+    example.setDate(1);
+    compareDates(actual, example);
+
+    actual.setHours(1, 2, 3, 4);
+    example.setHours(1, 2, 3, 4);
+    compareDates(actual, example);
+
+    actual.setMinutes(5, 6, 7);
+    example.setMinutes(5, 6, 7);
+    compareDates(actual, example);
+
+    actual.setSeconds(8, 9);
+    example.setSeconds(8, 9);
+    compareDates(actual, example);
+
+    actual.setMilliseconds(10);
+    example.setMilliseconds(10);
+    compareDates(actual, example);
+
+    actual.setUTCFullYear(2000, 2, 3);
+    example.setUTCFullYear(2000, 2, 3);
+    compareDates(actual, example);
+
+    actual.setUTCMonth(1, 1);
+    example.setUTCMonth(1, 1);
+    compareDates(actual, example);
+
+    actual.setUTCDate(1);
+    example.setUTCDate(1);
+    compareDates(actual, example);
+
+    actual.setUTCHours(1, 2, 3, 4);
+    example.setUTCHours(1, 2, 3, 4);
+    compareDates(actual, example);
+
+    actual.setUTCMinutes(5, 6, 7);
+    example.setUTCMinutes(5, 6, 7);
+    compareDates(actual, example);
+
+    actual.setUTCSeconds(8, 9);
+    example.setUTCSeconds(8, 9);
+    compareDates(actual, example);
+
+    actual.setUTCMilliseconds(10);
+    example.setUTCMilliseconds(10);
+    compareDates(actual, example);
+
+    actual.setTime(example.getTime());
+    actual.setTime(example.getTime());
+    compareDates(actual, example);
+  });
+
   it('should correctly create object without parameters', async () => {
     let date = new NDate();
     date.setUTCFullYear(2000, 1, 1);
