@@ -2,17 +2,6 @@ import {expect} from "chai";
 import {Date as NDate} from "../../src/library/NDate";
 import compareDates from "../utilities/compare.utility";
 
-/*
-  expect(ndate.toString()).to.be.equals(date.toString());
-  expect(ndate.toDateString()).to.be.equals(date.toDateString());
-  expect(ndate.toISOString()).to.be.equals(date.toISOString());
-  expect(ndate.toUTCString()).to.be.equals(date.toUTCString());
-  expect(ndate.toTimeString()).to.be.equals(date.toTimeString());
-  expect(ndate.toLocaleDateString()).to.be.equals(date.toLocaleDateString());
-  expect(ndate.toLocaleString()).to.be.equals(date.toLocaleString());
-  expect(ndate.toLocaleTimeString()).to.be.equals(date.toLocaleTimeString());
- */
-
 describe("NDate Constructor functionality", () => {
   let example: Date;
 

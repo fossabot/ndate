@@ -1,4 +1,4 @@
-import {NDate as INDate} from "../../src/Interfaces/NDate";
+import {Date as NDate} from "../../src/library/NDate";
 import {expect} from "chai";
 
 /**
@@ -6,7 +6,7 @@ import {expect} from "chai";
  * @param {NDate} ndate
  * @param {Date} date
  */
-export default function (ndate: INDate, date: Date) {
+export default function (ndate: NDate, date: Date) {
   // To string conversion
   expect(ndate.toString()).to.be.equals(date.toString());
   expect(ndate.toDateString()).to.be.equals(date.toDateString());

@@ -1,4 +1,3 @@
-import {expect} from "chai";
 import {Relative, Absolute} from "../../src/library/Interval";
 import {Date as NDate} from "../../src/library/NDate";
 import compareDates from "../utilities/compare.utility";
