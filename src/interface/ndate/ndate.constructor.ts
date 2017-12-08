@@ -1,5 +1,5 @@
-import {Absolute, Relative} from "../library/interval";
-import {BasicDate} from "../library/basic-date";
+import {Absolute, Relative} from "../../library/interval";
+import {BasicDate} from "../../library/basic-date";
 
 interface NDateConstructor {
   /**
