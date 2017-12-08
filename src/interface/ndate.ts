@@ -1,5 +1,5 @@
-import {Absolute, Relative} from "../library/Interval";
-import {BasicDate} from "../library/BasicDate";
+import {Absolute, Relative} from "../library/interval";
+import {BasicDate} from "../library/basic-date";
 
 interface NDateConstructor {
   /**
@@ -60,14 +60,14 @@ interface NDateInterface extends BasicDate {
 
   /**
    * Subtract Absolute Interval object value from current object value
-   * @param {Absolute} interval Absolute Interval object that value should be subtracted from current NDate object value
+   * @param {Absolute} interval Absolute Interval object that value should be subtracted from current ndate object value
    * @returns {NDateInterface} link to current object with updated date value
    */
   sub(interval: Absolute): NDateInterface;
 
   /**
    * Subtract Relative Interval object value from current object value
-   * @param {Relative} interval Relative Interval object that value should be subtracted from current NDate object value
+   * @param {Relative} interval Relative Interval object that value should be subtracted from current ndate object value
    * @returns {NDateInterface} link to current object with updated date value
    */
   sub(interval: Relative): NDateInterface;

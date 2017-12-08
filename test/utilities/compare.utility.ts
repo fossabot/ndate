@@ -1,4 +1,4 @@
-import {Date as NDate} from "../../src/library/NDate";
+import {Date as NDate} from "../../src/library/ndate";
 import {expect} from "chai";
 
 /**

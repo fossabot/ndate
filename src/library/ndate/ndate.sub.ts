@@ -1,4 +1,4 @@
-import {Absolute, Relative} from "../Interval";
+import {Absolute, Relative} from "../interval";
 
 type Constructor<T = {}> = new (...args: any[]) => T;
 
@@ -11,19 +11,19 @@ export default function <TBase extends Constructor>(Base: TBase) {
 
     /**
      * Subtract Absolute Interval object value from current object value
-     * @param {Absolute} interval Absolute Interval object that value should be subtracted from current NDate object value
+     * @param {Absolute} interval Absolute Interval object that value should be subtracted from current ndate object value
      * @returns {NDate} link to current object with updated date value
      */
     public sub(interval: Absolute): NDateSub;
     /**
      * Subtract Relative Interval object value from current object value
-     * @param {Relative} interval Relative Interval object that value should be subtracted from current NDate object value
+     * @param {Relative} interval Relative Interval object that value should be subtracted from current ndate object value
      * @returns {NDate} link to current object with updated date value
      */
     public sub(interval: Relative): NDateSub;
     /**
      * Subtract Interval object value from current object value
-     * @param {Relative} interval Relative Interval object that value should be subtracted from current NDate object value
+     * @param {Relative} interval Relative Interval object that value should be subtracted from current ndate object value
      * @returns {NDate} link to current object with updated date value
      */
     public sub(interval: Absolute | Relative): NDateSub {

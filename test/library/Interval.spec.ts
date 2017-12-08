@@ -1,8 +1,8 @@
 import {expect} from "chai";
-import {Relative, Absolute} from "../../src/library/Interval";
-import {Parameters} from "../../src/Interfaces/Interval";
+import {Relative, Absolute} from "../../src/library/interval";
+import {Parameters} from "../../src/interface/Interval";
 
-describe("Interval", () => {
+describe("Intervals Functionality", () => {
   describe("Formatting", () => {
     it('should correctly format simple string', async () => {
       let interval = new Relative(new Date('2000-01-01T00:00:00.000Z'), new Date('2001-03-04T04:05:06.007Z'));

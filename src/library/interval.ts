@@ -1,4 +1,4 @@
-import {Interval as IntervalInterface, Parameters} from "../Interfaces/Interval";
+import {Interval as IntervalInterface, Parameters} from "../interface/Interval";
 
 /**
  * Allowed characters for formatting interval into string

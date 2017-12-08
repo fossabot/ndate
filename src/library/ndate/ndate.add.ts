@@ -1,4 +1,4 @@
-import {Absolute, Relative} from "../Interval";
+import {Absolute, Relative} from "../interval";
 
 type Constructor<T = {}> = new (...args: any[]) => T;
 

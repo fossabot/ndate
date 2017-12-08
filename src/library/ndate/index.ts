@@ -1,7 +1,7 @@
 import NDateAdd from "./ndate.add";
 import NDateSub from "./ndate.sub";
-import {BasicDate} from "../BasicDate";
-import {NDateInterface, NDateConstructor} from "../../Interfaces/NDate";
+import {BasicDate} from "../basic-date";
+import {NDateInterface, NDateConstructor} from "../../interface/ndate";
 
 /**
  * Apply mixins of all available additional functionality
