@@ -1,6 +1,7 @@
 import {Relative, Absolute} from "../../src/library/interval";
 import {Date as NDate} from "../../src/library/ndate";
 import compareDates from "../utilities/compare.utility";
+import {expect} from "chai";
 
 describe("ndate Subtracting functionality", () => {
   let begin: Date;
@@ -28,5 +29,13 @@ describe("ndate Subtracting functionality", () => {
     date.sub(new Relative(new Date(begin), new Date(end)));
 
     compareDates(date, begin);
+  });
+
+  it('should throw TypeError on wrong parameter type', async () => {
+    let date = new NDate(new Date(begin));
+
+    expect(() => {
+      date.sub({} as any);
+    }).to.throw('NDate.add method called with wrong parameter type "object"');
   });
 });

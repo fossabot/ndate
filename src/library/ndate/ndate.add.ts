@@ -44,7 +44,7 @@ export default function <TBase extends Constructor>(Base: TBase) {
         return this;
       }
 
-      throw TypeError(`NDate.add method called with wrong parameter type ${typeof(interval)}`);
+      throw TypeError(`NDate.add method called with wrong parameter type "${typeof(interval)}"`);
     }
   };
 }

@@ -11,6 +11,29 @@ describe("ndate Constructor functionality", () => {
     example.setUTCHours(0, 0, 0, 0);
   });
 
+  it('should correctly create object without parameters', async () => {
+    let date = new NDate();
+    date.setUTCFullYear(2000, 1, 1);
+    date.setUTCHours(0, 0, 0, 0);
+
+    compareDates(date, example);
+  });
+
+  it('should correctly create object with NDate parameter', async () => {
+    let date = new NDate();
+    date.setUTCFullYear(2000, 1, 1);
+    date.setUTCHours(0, 0, 0, 0);
+
+    compareDates(new NDate(date), example);
+  });
+
+  it('should correctly create object with parameters set', async () => {
+    const actual = new NDate(2000, 1, 1, 0, 0, 0, 0);
+    const expected = new Date(2000, 1, 1, 0, 0, 0, 0);
+
+    compareDates(actual, expected);
+  });
+
   it('should correctly create object from ISO string', async () => {
     let date = new NDate((new Date(example).toISOString()));
     compareDates(date, example);
@@ -21,6 +44,12 @@ describe("ndate Constructor functionality", () => {
     const expected = Date.now();
 
     expect(actual).to.be.equals(expected);
+  });
+
+  it('should correctly create object from ndate.valueOf() calling', async () => {
+    const actual = new NDate(example).valueOf();
+
+    expect(actual).to.be.equals(example.valueOf());
   });
 
   it('should correctly create object from ndate.parse() calling', async () => {
@@ -35,5 +64,13 @@ describe("ndate Constructor functionality", () => {
     const expected = Date.UTC(2000, 1, 1, 0, 0, 0, 0);
 
     expect(actual).to.be.equals(expected);
+  });
+
+  it('should trigger TypeError on wrong type conversion called', async () => {
+    const actual = new NDate();
+
+    expect(() => {
+      actual[Symbol.toPrimitive]('wrong' as any);
+    }).to.throw('Called wrong hint type "wrong"');
   });
 });

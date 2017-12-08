@@ -59,8 +59,6 @@ class BasicDate implements Date {
     if (value.length === 1) {
       if (value[0] instanceof BasicDate) {
         this.date = new Date(value[0].getTime());
-      } if (value[0] instanceof BasicDate) {
-        this.date = new Date(value[0].getTime());
       } else {
         this.date = new Date(value[0]);
       }

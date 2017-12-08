@@ -21,6 +21,7 @@ export default function (ndate: NDate, date: Date) {
   expect(ndate.getFullYear()).to.be.equals(date.getFullYear());
   expect(ndate.getMonth()).to.be.equals(date.getMonth());
   expect(ndate.getDate()).to.be.equals(date.getDate());
+  expect(ndate.getDay()).to.be.equals(date.getDay());
   expect(ndate.getHours()).to.be.equals(date.getHours());
   expect(ndate.getMinutes()).to.be.equals(date.getMinutes());
   expect(ndate.getSeconds()).to.be.equals(date.getSeconds());
@@ -30,6 +31,7 @@ export default function (ndate: NDate, date: Date) {
   expect(ndate.getUTCFullYear()).to.be.equals(date.getUTCFullYear());
   expect(ndate.getUTCMonth()).to.be.equals(date.getUTCMonth());
   expect(ndate.getUTCDate()).to.be.equals(date.getUTCDate());
+  expect(ndate.getUTCDay()).to.be.equals(date.getUTCDay());
   expect(ndate.getUTCHours()).to.be.equals(date.getUTCHours());
   expect(ndate.getUTCMinutes()).to.be.equals(date.getUTCMinutes());
   expect(ndate.getUTCSeconds()).to.be.equals(date.getUTCSeconds());
@@ -37,4 +39,14 @@ export default function (ndate: NDate, date: Date) {
 
   // Time values
   expect(ndate.getTime()).to.be.equals(date.getTime());
+
+  // Other
+  expect(ndate.valueOf()).to.be.equals(date.valueOf());
+  expect(ndate.getTimezoneOffset()).to.be.equals(date.getTimezoneOffset());
+  expect(ndate.toJSON()).to.be.deep.equals(date.toJSON());
+  expect(ndate.toJSON()).to.be.deep.equals(date.toJSON());
+
+  // Symbols
+  expect(ndate[Symbol.toPrimitive]('string')).to.be.deep.equals(date[Symbol.toPrimitive]('string'));
+  expect(ndate[Symbol.toPrimitive]('number')).to.be.deep.equals(date[Symbol.toPrimitive]('number'));
 }
