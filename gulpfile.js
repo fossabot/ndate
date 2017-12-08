@@ -13,7 +13,7 @@ const outDir = 'build';
  * Remove build directory.
  */
 gulp.task('clean', () => {
-  return gulp.src(`${outDir}/src/**/*`, { read: false })
+  return gulp.src(`${outDir}`, { read: false })
     .pipe(rimraf());
 });
 
@@ -42,7 +42,7 @@ gulp.task('build', ['tslint', 'compile'], () => {
  */
 gulp.task('test', ['build'], () => {
 
-  gulp.src([outDir + '/test/**/*.js'])
+  gulp.src([outDir + '/test/**/*.spec.js'])
     .pipe(mocha())
     .pipe(istanbul.writeReports({reportOpts: {dir: outDir + '/coverage'}}))
     .pipe(istanbul.enforceThresholds({
