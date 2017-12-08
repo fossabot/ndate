@@ -40,7 +40,7 @@ class NDate extends NDatePrototype implements NDateInterface {
    * @returns {number}
    * @constructor
    */
-  static UTC(year: number, month: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number): number {
+  public static UTC(year: number, month: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number): number {
     return Date.UTC(year, month, date, hours, minutes, seconds, ms);
   };
 
@@ -48,7 +48,7 @@ class NDate extends NDatePrototype implements NDateInterface {
    * Returns the number of milliseconds between midnight, January 1, 1970 Universal Coordinated Time (UTC) (or GMT) and the specified date.
    * @returns {number}
    */
-  static now(): number {
+  public static now(): number {
     return Date.now();
   };
 }
