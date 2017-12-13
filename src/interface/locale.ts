@@ -1,7 +1,23 @@
 /**
  * Code of current region settings using
  */
-type Code = 'af-ZA' | 'am-ET' | 'ar-AE' | 'ar-BH' | 'ar-DZ' | 'ar-EG' |
+type Code =
+  'af' | 'am' | 'ar' | 'arn' | 'as' | 'az' | 'ba' | 'be' | 'bg' |
+  'bn' | 'bo' | 'br' | 'bs' | 'ca' | 'co' | 'cs' | 'cy' | 'da' |
+  'de' | 'dsb' | 'dv' | 'el' | 'en' | 'es' | 'et' | 'eu' | 'fa' |
+  'fi' | 'fil' | 'fo' | 'fr' | 'fy' | 'ga' | 'gd' | 'gl' | 'gsw' |
+  'gu' | 'ha' | 'he' | 'hi' | 'hr' | 'hsb' | 'hu' | 'hy' | 'id' |
+  'ig' | 'ii' | 'is' | 'it' | 'iu' | 'ja' | 'ka' | 'kk' | 'kl' |
+  'km' | 'kn' | 'kok' | 'ko' | 'ky' | 'lb' | 'lo' | 'lt' | 'lv' |
+  'mi' | 'mk' | 'ml' | 'mn' | 'moh' | 'mr' | 'ms' | 'mt' | 'nb' |
+  'ne' | 'nl' | 'nn' | 'nso' | 'oc' | 'or' | 'pa' | 'pl' | 'prs' |
+  'ps' | 'pt' | 'qut' | 'quz' | 'rm' | 'ro' | 'ru' | 'rw' | 'sah' |
+  'sa' | 'se' | 'si' | 'sk' | 'sl' | 'sma' | 'smj' | 'smn' | 'sms' |
+  'sq' | 'sr' | 'sv' | 'sw' | 'syr' | 'ta' | 'te' | 'tg' | 'th' |
+  'tk' | 'tn' | 'tr' | 'tt' | 'tzm' | 'ug' | 'uk' | 'ur' | 'uz' |
+  'vi' | 'wo' | 'xh' | 'yo' | 'zh' | 'zu' |
+
+  'af-ZA' | 'am-ET' | 'ar-AE' | 'ar-BH' | 'ar-DZ' | 'ar-EG' |
   'ar-IQ' | 'ar-JO' | 'ar-KW' | 'ar-LB' | 'ar-LY' | 'ar-MA' |
   'arn-CL' | 'ar-OM' | 'ar-QA' | 'ar-SA' | 'ar-SY' | 'ar-TN' |
   'ar-YE' | 'as-IN' | 'az-Cyrl-AZ' | 'az-Latn-AZ' | 'ba-RU' |
