@@ -24,7 +24,47 @@
   ],
   "scripts": {
     "build": "gulp default",
-    "test": "gulp test"
+    "test": "npm run build && nyc mocha -r ts-node/register -r source-map-support/register --recursive test/**/*"
+  },
+  "nyc": {
+    "report-dir": "build/coverage",
+    "check-coverage": true,
+    "fail": true,
+    "cache": false,
+    "all": false,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "watermarks": {
+      "lines": [
+        95,
+        100
+      ],
+      "functions": [
+        95,
+        100
+      ],
+      "branches": [
+        95,
+        100
+      ],
+      "statements": [
+        95,
+        100
+      ]
+    },
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "src/**/*"
+    ],
+    "reporter": [
+      "html",
+      "text",
+      "text-summary"
+    ]
   },
   "dependencies": {},
   "devDependencies": {
@@ -34,14 +74,15 @@
     "chai": "^4.1.2",
     "gulp": "^3.9.1",
     "gulp-env": "^0.4.0",
-    "gulp-istanbul": "^1.1.2",
-    "gulp-mocha": "^3.0.1",
     "gulp-replace": "^0.5.4",
     "gulp-rimraf": "^0.2.1",
     "gulp-shell": "^0.5.2",
     "gulp-tslint": "^7.1.0",
     "mocha": "^3.5.3",
+    "nyc": "^11.3.0",
     "sinon": "^3.3.0",
+    "source-map-support": "^0.5.0",
+    "ts-node": "^4.0.1",
     "tslint": "^4.5.1",
     "typescript": "^2.5.2"
   },

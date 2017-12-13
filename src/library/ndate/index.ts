@@ -1,5 +1,7 @@
 import NDateAdd from "./ndate.add";
 import NDateSub from "./ndate.sub";
+import NDateFormat from "./ndate.format";
+import NDateLocale from "./ndate.locale";
 import {BasicDate} from "../basic-date";
 import {NDateInterface, NDateConstructor} from "../../interface/ndate";
 
@@ -8,11 +10,15 @@ import {NDateInterface, NDateConstructor} from "../../interface/ndate";
  * @see https://blog.mariusschulz.com/2017/05/26/typescript-2-2-mixin-classes
  * @type {NDateConstructor}
  */
-const NDatePrototype: NDateConstructor = NDateSub(
-  NDateAdd(
-    BasicDate
+const NDatePrototype: NDateConstructor = NDateLocale(
+  NDateFormat(
+    NDateSub(
+      NDateAdd(
+        BasicDate
+      )
+    )
   )
-) as any;
+)as any;
 
 /**
  * NDate class with all required methods implementation
