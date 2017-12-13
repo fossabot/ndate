@@ -7,8 +7,6 @@ cache:
   directories:
     - "node_modules"
 before_script:
-  - npm install -g gulp-cli nyc typescript mocha
-install:
-  - npm install
+  - npm install -g gulp gulp-cli nyc typescript mocha
 script:
   - npm run test
