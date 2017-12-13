@@ -1,6 +1,4 @@
-### NDate - Extended date library for TypeScript
-
-##### Status
+# NDate - Extended date library for TypeScript
 
 [![Travis CI build status](https://travis-ci.org/akazakou/node-date.svg?branch=master)](https://travis-ci.org/akazakou/node-date)
 
