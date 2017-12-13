@@ -2,7 +2,7 @@
 
 ##### Status
 
-![Travis CI build status](https://travis-ci.org/akazakou/node-date.svg?branch=master)
+[![Travis CI build status](https://travis-ci.org/akazakou/node-date.svg?branch=master)](https://travis-ci.org/akazakou/node-date)
 
 NDate - Extended date library for TypeScript with backward capability to native javascript Date object.
 
