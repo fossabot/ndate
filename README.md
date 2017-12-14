@@ -1,6 +1,7 @@
 # NDate - Extended date library for TypeScript
 
 [![Travis CI build status](https://travis-ci.org/akazakou/node-date.svg?branch=master)](https://travis-ci.org/akazakou/node-date)
+[![codecov](https://codecov.io/gh/akazakou/node-date/branch/master/graph/badge.svg)](https://codecov.io/gh/akazakou/node-date)
 
 NDate - Extended date library for TypeScript with backward capability to native javascript Date object.
 

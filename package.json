@@ -1,16 +1,16 @@
 {
-  "name": "node-date",
+  "name": "ndate",
   "version": "0.0.1",
-  "homepage": "https://github.com/akazakou/node-date/wiki",
+  "homepage": "https://github.com/akazakou/ndate/wiki",
   "author": "Andrei Kazakou",
   "main": "build/src/index.js",
   "description": "Implementation of comfortable work with dates, intervals and timezones",
   "bugs": {
-    "url": "https://github.com/akazakou/node-date/issues"
+    "url": "https://github.com/akazakou/ndate/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:akazakou/node-date.git"
+    "url": "git@github.com:akazakou/ndate.git"
   },
   "license": "MIT",
   "keywords": [
@@ -24,7 +24,9 @@
   ],
   "scripts": {
     "build": "gulp default",
-    "test": "npm run build && nyc mocha -r ts-node/register -r source-map-support/register --recursive test/**/*"
+    "test": "npm run build && npm run coverage",
+    "coverage": "nyc mocha -r ts-node/register -r source-map-support/register --recursive test/**/*",
+    "codecov": "codecov -f build/coverage/*.json -t $CODECOV_TOKEN"
   },
   "nyc": {
     "report-dir": "build/coverage",
@@ -63,7 +65,8 @@
     "reporter": [
       "html",
       "text",
-      "text-summary"
+      "text-summary",
+      "json"
     ]
   },
   "dependencies": {},
@@ -72,6 +75,7 @@
     "@types/mocha": "^2.2.43",
     "@types/sinon": "^2.3.5",
     "chai": "^4.1.2",
+    "codecov": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-env": "^0.4.0",
     "gulp-replace": "^0.5.4",
