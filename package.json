@@ -69,7 +69,10 @@
       "json"
     ]
   },
-  "dependencies": {},
+  "dependencies": {
+    "moment": "^2.19.4",
+    "moment-timezone": "^0.5.14"
+  },
   "devDependencies": {
     "@types/chai": "^4.0.4",
     "@types/mocha": "^2.2.43",
