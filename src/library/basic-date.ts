@@ -1,8 +1,11 @@
+import * as moment from 'moment';
+import {isNullOrUndefined} from "util";
+
 class BasicDate implements Date {
   /**
    * Current state of date object
    */
-  protected date: Date;
+  protected date: moment.Moment;
 
   /**
    * Converts a Date object to a string.
@@ -52,22 +55,18 @@ class BasicDate implements Date {
   public constructor(...value: any[]) {
     // if we do not have arguments it's means create current date object
     if (value.length === 0) {
-      this.date = new Date();
+      this.date = moment();
     }
 
     // try to parse only one argument
     if (value.length === 1) {
-      if (value[0] instanceof BasicDate) {
-        this.date = new Date(value[0].getTime());
-      } else {
-        this.date = new Date(value[0]);
-      }
+        this.date = moment(new Date(value[0].valueOf()));
     }
 
     // if we have more than one argument
     if (value.length > 1) {
       const [year, month, date, hours, minutes, seconds, ms] = value;
-      this.date = new Date(year, month, date, hours, minutes, seconds, ms);
+      this.date = moment(new Date(year, month, date, hours, minutes, seconds, ms));
     }
   }
 
@@ -76,7 +75,7 @@ class BasicDate implements Date {
    * @returns {string}
    */
   public toString(): string {
-    return this.date.toString();
+    return this.date.toDate().toString();
   };
 
   /**
@@ -84,7 +83,7 @@ class BasicDate implements Date {
    * @returns {string}
    */
   public toDateString(): string {
-    return this.date.toDateString();
+    return this.date.toDate().toDateString();
   }
 
   /**
@@ -92,7 +91,7 @@ class BasicDate implements Date {
    * @returns {string}
    */
   public toTimeString(): string {
-    return this.date.toTimeString();
+    return this.date.toDate().toTimeString();
   }
 
   /**
@@ -100,7 +99,7 @@ class BasicDate implements Date {
    * @returns {string}
    */
   public toLocaleString(): string {
-    return this.date.toLocaleString();
+    return this.date.toDate().toLocaleString();
   }
 
   /**
@@ -108,7 +107,7 @@ class BasicDate implements Date {
    * @returns {string}
    */
   public toLocaleDateString(): string {
-    return this.date.toLocaleDateString();
+    return this.date.toDate().toLocaleDateString();
   }
 
   /**
@@ -116,7 +115,7 @@ class BasicDate implements Date {
    * @returns {string}
    */
   public toLocaleTimeString(): string {
-    return this.date.toLocaleTimeString();
+    return this.date.toDate().toLocaleTimeString();
   }
 
   /**
@@ -124,7 +123,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public valueOf(): number {
-    return this.date.valueOf();
+    return this.date.toDate().valueOf();
   }
 
   /**
@@ -132,7 +131,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getTime(): number {
-    return this.date.getTime();
+    return this.date.toDate().getTime();
   }
 
   /**
@@ -140,7 +139,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getFullYear(): number {
-    return this.date.getFullYear();
+    return this.date.toDate().getFullYear();
   }
 
   /**
@@ -148,7 +147,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCFullYear(): number {
-    return this.date.getUTCFullYear();
+    return this.date.toDate().getUTCFullYear();
   }
 
   /**
@@ -156,7 +155,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getMonth(): number {
-    return this.date.getMonth();
+    return this.date.toDate().getMonth();
   }
 
   /**
@@ -164,7 +163,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCMonth(): number {
-    return this.date.getUTCMonth();
+    return this.date.toDate().getUTCMonth();
   }
 
   /**
@@ -172,7 +171,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getDate(): number {
-    return this.date.getDate();
+    return this.date.toDate().getDate();
   }
 
   /**
@@ -180,7 +179,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCDate(): number {
-    return this.date.getUTCDate();
+    return this.date.toDate().getUTCDate();
   }
 
   /**
@@ -188,7 +187,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getDay(): number {
-    return this.date.getDay();
+    return this.date.toDate().getDay();
   }
 
   /**
@@ -196,7 +195,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCDay(): number {
-    return this.date.getUTCDay();
+    return this.date.toDate().getUTCDay();
   }
 
   /**
@@ -204,7 +203,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getHours(): number {
-    return this.date.getHours();
+    return this.date.toDate().getHours();
   }
 
   /**
@@ -212,7 +211,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCHours(): number {
-    return this.date.getUTCHours();
+    return this.date.toDate().getUTCHours();
   }
 
   /**
@@ -220,7 +219,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getMinutes(): number {
-    return this.date.getMinutes();
+    return this.date.toDate().getMinutes();
   }
 
   /**
@@ -228,7 +227,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCMinutes(): number {
-    return this.date.getUTCMinutes();
+    return this.date.toDate().getUTCMinutes();
   }
 
   /**
@@ -236,7 +235,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getSeconds(): number {
-    return this.date.getSeconds();
+    return this.date.toDate().getSeconds();
   }
 
   /**
@@ -244,7 +243,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCSeconds(): number {
-    return this.date.getUTCSeconds();
+    return this.date.toDate().getUTCSeconds();
   }
 
   /**
@@ -252,7 +251,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getMilliseconds(): number {
-    return this.date.getMilliseconds();
+    return this.date.toDate().getMilliseconds();
   }
 
   /**
@@ -260,7 +259,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCMilliseconds(): number {
-    return this.date.getUTCMilliseconds();
+    return this.date.toDate().getUTCMilliseconds();
   }
 
   /**
@@ -268,7 +267,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getTimezoneOffset(): number {
-    return this.date.getTimezoneOffset();
+    return this.date.toDate().getTimezoneOffset();
   }
 
   /**
@@ -277,7 +276,8 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 GMT.
    */
   public setTime(time: number): number {
-    return this.date.setTime(time);
+    this.date = moment(time);
+    return this.date.valueOf();
   }
 
   /**
@@ -286,7 +286,8 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 GMT.
    */
   public setMilliseconds(ms: number): number {
-    return this.date.setMilliseconds(ms);
+    this.date.set('milliseconds', ms);
+    return this.date.valueOf();
   }
 
   /**
@@ -295,7 +296,12 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 using Universal Coordinated Time (UTC).
    */
   public setUTCMilliseconds(ms: number): number {
-    return this.date.setUTCMilliseconds(ms);
+    this.date.utc();
+
+    this.date.set('milliseconds', ms);
+
+    this.date.local();
+    return this.date.valueOf();
   }
 
   /**
@@ -305,7 +311,10 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 GMT.
    */
   public setSeconds(sec: number, ms?: number): number {
-    return this.date.setSeconds(sec, ms);
+    this.date.set('seconds', sec);
+    isNullOrUndefined(ms) || this.date.set('milliseconds', ms);
+
+    return this.date.valueOf();
   }
 
   /**
@@ -315,7 +324,13 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 using Universal Coordinated Time (UTC).
    */
   public setUTCSeconds(sec: number, ms?: number): number {
-    return this.date.setUTCSeconds(sec, ms);
+    this.date.utc();
+
+    this.date.set('seconds', sec);
+    isNullOrUndefined(ms) || this.date.set('milliseconds', ms);
+
+    this.date.local();
+    return this.date.valueOf();
   }
 
   /**
@@ -326,7 +341,11 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 GMT.
    */
   public setMinutes(min: number, sec?: number, ms?: number): number {
-    return this.date.setMinutes(min, sec, ms);
+    this.date.set('minutes', min);
+    isNullOrUndefined(sec) || this.date.set('seconds', sec);
+    isNullOrUndefined(ms) || this.date.set('milliseconds', ms);
+
+    return this.date.valueOf();
   }
 
   /**
@@ -337,7 +356,14 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 using Universal Coordinated Time (UTC).
    */
   public setUTCMinutes(min: number, sec?: number, ms?: number): number {
-    return this.date.setUTCMinutes(min, sec, ms);
+    this.date.utc();
+
+    this.date.set('minutes', min);
+    isNullOrUndefined(sec) || this.date.set('seconds', sec);
+    isNullOrUndefined(ms) || this.date.set('milliseconds', ms);
+
+    this.date.local();
+    return this.date.valueOf();
   }
 
   /**
@@ -349,7 +375,12 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 GMT.
    */
   public setHours(hours: number, min?: number, sec?: number, ms?: number): number {
-    return this.date.setHours(hours, min, sec, ms);
+    this.date.set('hours', hours);
+    isNullOrUndefined(min) || this.date.set('minutes', min);
+    isNullOrUndefined(sec) || this.date.set('seconds', sec);
+    isNullOrUndefined(ms) || this.date.set('milliseconds', ms);
+
+    return this.date.valueOf();
   }
 
   /**
@@ -361,7 +392,15 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 using Universal Coordinated Time (UTC).
    */
   public setUTCHours(hours: number, min?: number, sec?: number, ms?: number): number {
-    return this.date.setUTCHours(hours, min, sec, ms);
+    this.date.utc();
+
+    this.date.set('hours', hours);
+    isNullOrUndefined(min) || this.date.set('minutes', min);
+    isNullOrUndefined(sec) || this.date.set('seconds', sec);
+    isNullOrUndefined(ms) || this.date.set('milliseconds', ms);
+    this.date.local();
+
+    return this.date.valueOf();
   }
 
   /**
@@ -370,7 +409,9 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 GMT.
    */
   public setDate(date: number): number {
-    return this.date.setDate(date);
+    this.date.set('date', date);
+
+    return this.date.valueOf();
   }
 
   /**
@@ -379,7 +420,12 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 using Universal Coordinated Time (UTC).
    */
   public setUTCDate(date: number): number {
-    return this.date.setUTCDate(date);
+    this.date.utc();
+
+    this.date.set('date', date);
+
+    this.date.local();
+    return this.date.valueOf();
   }
 
   /**
@@ -389,7 +435,10 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 GMT.
    */
   public setMonth(month: number, date?: number): number {
-    return this.date.setMonth(month, date);
+    this.date.set('month', month);
+    isNullOrUndefined(date) || this.date.set('date', date);
+
+    return this.date.valueOf();
   }
 
   /**
@@ -399,7 +448,13 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 using Universal Coordinated Time (UTC).
    */
   public setUTCMonth(month: number, date?: number): number {
-    return this.date.setUTCMonth(month, date);
+    this.date.utc();
+
+    this.date.set('month', month);
+    isNullOrUndefined(date) || this.date.set('date', date);
+
+    this.date.local();
+    return this.date.valueOf();
   }
 
   /**
@@ -410,7 +465,11 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 GMT.
    */
   public setFullYear(year: number, month?: number, date?: number): number {
-    return this.date.setFullYear(year, month, date);
+    this.date.set('year', year);
+    isNullOrUndefined(month) || this.date.set('month', month);
+    isNullOrUndefined(date) || this.date.set('date', date);
+
+    return this.date.valueOf();
   }
 
   /**
@@ -421,7 +480,14 @@ class BasicDate implements Date {
    * @returns {number} new value in milliseconds since midnight, January 1, 1970 using Universal Coordinated Time (UTC).
    */
   public setUTCFullYear(year: number, month?: number, date?: number): number {
-    return this.date.setUTCFullYear(year, month, date);
+    this.date.utc();
+
+    this.date.set('year', year);
+    isNullOrUndefined(month) || this.date.set('month', month);
+    isNullOrUndefined(date) || this.date.set('date', date);
+
+    this.date.local();
+    return this.date.valueOf();
   }
 
   /**
@@ -429,7 +495,7 @@ class BasicDate implements Date {
    * @returns {string}
    */
   public toUTCString(): string {
-    return this.date.toUTCString();
+    return this.date.toDate().toUTCString();
   }
 
   /**
@@ -437,7 +503,7 @@ class BasicDate implements Date {
    * @returns {string}
    */
   public toISOString(): string {
-    return this.date.toISOString();
+    return this.date.toDate().toISOString();
   }
 
   /**
@@ -446,7 +512,7 @@ class BasicDate implements Date {
    * @returns {string}
    */
   public toJSON(key?: any): string {
-    return this.date.toJSON(key);
+    return this.date.toDate().toJSON(key);
   }
 }
 
