@@ -123,7 +123,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public valueOf(): number {
-    return this.date.toDate().valueOf();
+    return this.date.valueOf();
   }
 
   /**
@@ -131,7 +131,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getTime(): number {
-    return this.date.toDate().getTime();
+    return this.date.valueOf();
   }
 
   /**
@@ -139,7 +139,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getFullYear(): number {
-    return this.date.toDate().getFullYear();
+    return this.date.get('year');
   }
 
   /**
@@ -147,7 +147,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCFullYear(): number {
-    return this.date.toDate().getUTCFullYear();
+    return this.date.clone().utc().get('year');
   }
 
   /**
@@ -155,7 +155,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getMonth(): number {
-    return this.date.toDate().getMonth();
+    return this.date.get('month');
   }
 
   /**
@@ -163,7 +163,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCMonth(): number {
-    return this.date.toDate().getUTCMonth();
+    return this.date.clone().utc().get('month');
   }
 
   /**
@@ -171,7 +171,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getDate(): number {
-    return this.date.toDate().getDate();
+    return this.date.get('date');
   }
 
   /**
@@ -179,7 +179,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCDate(): number {
-    return this.date.toDate().getUTCDate();
+    return this.date.clone().utc().get('date');
   }
 
   /**
@@ -187,7 +187,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getDay(): number {
-    return this.date.toDate().getDay();
+    return this.date.get('day');
   }
 
   /**
@@ -195,7 +195,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCDay(): number {
-    return this.date.toDate().getUTCDay();
+    return this.date.clone().utc().get('day');
   }
 
   /**
@@ -203,7 +203,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getHours(): number {
-    return this.date.toDate().getHours();
+    return this.date.get('hours');
   }
 
   /**
@@ -211,7 +211,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCHours(): number {
-    return this.date.toDate().getUTCHours();
+    return this.date.clone().utc().get('hours');
   }
 
   /**
@@ -219,7 +219,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getMinutes(): number {
-    return this.date.toDate().getMinutes();
+    return this.date.get('minutes');
   }
 
   /**
@@ -227,7 +227,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCMinutes(): number {
-    return this.date.toDate().getUTCMinutes();
+    return this.date.clone().utc().get('minutes');
   }
 
   /**
@@ -235,7 +235,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getSeconds(): number {
-    return this.date.toDate().getSeconds();
+    return this.date.get('seconds');
   }
 
   /**
@@ -243,7 +243,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCSeconds(): number {
-    return this.date.toDate().getUTCSeconds();
+    return this.date.clone().utc().get('seconds');
   }
 
   /**
@@ -251,7 +251,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getMilliseconds(): number {
-    return this.date.toDate().getMilliseconds();
+    return this.date.get('milliseconds');
   }
 
   /**
@@ -259,7 +259,7 @@ class BasicDate implements Date {
    * @returns {number}
    */
   public getUTCMilliseconds(): number {
-    return this.date.toDate().getUTCMilliseconds();
+    return this.date.clone().utc().get('milliseconds');
   }
 
   /**
@@ -298,7 +298,7 @@ class BasicDate implements Date {
   public setUTCMilliseconds(ms: number): number {
     this.date.utc();
 
-    this.date.set('milliseconds', ms);
+    this.setMilliseconds(ms);
 
     this.date.local();
     return this.date.valueOf();
@@ -326,8 +326,7 @@ class BasicDate implements Date {
   public setUTCSeconds(sec: number, ms?: number): number {
     this.date.utc();
 
-    this.date.set('seconds', sec);
-    isNullOrUndefined(ms) || this.date.set('milliseconds', ms);
+    this.setSeconds(sec, ms);
 
     this.date.local();
     return this.date.valueOf();
@@ -358,9 +357,7 @@ class BasicDate implements Date {
   public setUTCMinutes(min: number, sec?: number, ms?: number): number {
     this.date.utc();
 
-    this.date.set('minutes', min);
-    isNullOrUndefined(sec) || this.date.set('seconds', sec);
-    isNullOrUndefined(ms) || this.date.set('milliseconds', ms);
+    this.setMinutes(min, sec, ms);
 
     this.date.local();
     return this.date.valueOf();
@@ -394,12 +391,9 @@ class BasicDate implements Date {
   public setUTCHours(hours: number, min?: number, sec?: number, ms?: number): number {
     this.date.utc();
 
-    this.date.set('hours', hours);
-    isNullOrUndefined(min) || this.date.set('minutes', min);
-    isNullOrUndefined(sec) || this.date.set('seconds', sec);
-    isNullOrUndefined(ms) || this.date.set('milliseconds', ms);
-    this.date.local();
+    this.setHours(hours, min, sec, ms);
 
+    this.date.local();
     return this.date.valueOf();
   }
 
@@ -422,7 +416,7 @@ class BasicDate implements Date {
   public setUTCDate(date: number): number {
     this.date.utc();
 
-    this.date.set('date', date);
+    this.setDate(date);
 
     this.date.local();
     return this.date.valueOf();
@@ -450,8 +444,7 @@ class BasicDate implements Date {
   public setUTCMonth(month: number, date?: number): number {
     this.date.utc();
 
-    this.date.set('month', month);
-    isNullOrUndefined(date) || this.date.set('date', date);
+    this.setMonth(month, date);
 
     this.date.local();
     return this.date.valueOf();
@@ -482,9 +475,7 @@ class BasicDate implements Date {
   public setUTCFullYear(year: number, month?: number, date?: number): number {
     this.date.utc();
 
-    this.date.set('year', year);
-    isNullOrUndefined(month) || this.date.set('month', month);
-    isNullOrUndefined(date) || this.date.set('date', date);
+    this.setFullYear(year, month, date);
 
     this.date.local();
     return this.date.valueOf();
